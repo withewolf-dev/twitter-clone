@@ -1,5 +1,6 @@
 import React from "react";
 import { SparklesIcon } from "@heroicons/react/outline";
+import Input from "./Input";
 
 interface Props {}
 
@@ -12,6 +13,7 @@ export const Feed = (props: Props) => {
           <SparklesIcon className="h-5 text-white" />
         </div>
       </div>
+      <Input />
     </div>
   );
 };
