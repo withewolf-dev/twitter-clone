@@ -5,23 +5,27 @@ import {
   PhotographIcon,
   XIcon,
 } from "@heroicons/react/outline";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
 import {
   addDoc,
   collection,
   doc,
+  onSnapshot,
+  orderBy,
+  query,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
 import firestore, { storage } from "../firebaseinit";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
+import { useSession } from "next-auth/react";
 
 interface Props {}
 
 const Input = (props: Props) => {
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -33,10 +37,10 @@ const Input = (props: Props) => {
     setLoading(true);
 
     const docRef = await addDoc(collection(firestore, "posts"), {
-      // id: session.user.uid,
-      // username: session.user.name,
-      // userImg: session.user.image,
-      // tag: session.user.tag,
+      id: session.user[`uid`],
+      username: session.user.name,
+      userImg: session.user.image,
+      tag: session.user[`tag`],
       text: input,
       timestamp: serverTimestamp(),
     });
@@ -84,9 +88,7 @@ const Input = (props: Props) => {
       }`}
     >
       <img
-        src={
-          "https://images.unsplash.com/photo-1532074205216-d0e1f4b87368?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=441&q=80"
-        }
+        src={session.user.image}
         alt=""
         className="h-11 w-11 rounded-full cursor-pointer"
       />
