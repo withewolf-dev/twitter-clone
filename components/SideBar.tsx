@@ -47,7 +47,13 @@ const SideBar = (props: Props) => {
           <h4 className="font-bold">{session.user.name}</h4>
           <p className="text-[#6e767d]">@{session.user[`tag`]}</p>
         </div>
-        <DotsHorizontalIcon className="h-5 hidden xl:inline ml-10" />
+        <DotsHorizontalIcon
+          className="h-5 hidden xl:inline ml-10"
+          onClick={(e) => {
+            e.preventDefault();
+            signOut();
+          }}
+        />
       </div>
     </div>
   );

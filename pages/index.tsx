@@ -5,11 +5,13 @@ import {
   useSession,
 } from "next-auth/react";
 import Head from "next/head";
+import { useEffect } from "react";
 import { Feed } from "../components/Feed";
 import Login from "../components/Login";
 import Modal from "../components/Modal";
 import SideBar from "../components/SideBar";
-import { selectPost } from "../slice/post-slice";
+import Widgets from "../components/Widget";
+import { selectPost, setSession } from "../slice/post-slice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 export default function Home({ trendingResults, followResults, providers }) {
@@ -17,7 +19,15 @@ export default function Home({ trendingResults, followResults, providers }) {
 
   const select = useAppSelector(selectPost);
 
+  const dispatch = useAppDispatch();
+
   if (!session) return <Login providers={providers} />;
+  console.log(session.user);
+
+  useEffect(() => {
+    dispatch(setSession(session.user));
+  }, [session]);
+
   return (
     <div>
       <Head>
@@ -28,6 +38,10 @@ export default function Home({ trendingResults, followResults, providers }) {
       <main className="bg-black min-h-screen flex max-w-[1500px] mx-auto">
         <SideBar />
         <Feed />
+        <Widgets
+          trendingResults={trendingResults}
+          followResults={followResults}
+        />
         {select.modal && <Modal />}
       </main>
     </div>

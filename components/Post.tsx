@@ -87,7 +87,8 @@ const Post = ({ postPage, post, id }: Props) => {
   return (
     <div
       className="p-3 flex cursor-pointer border-b border-gray-700"
-      onClick={() => router.push(`/${id}`)}
+      //onClick={() => router.push(`/${id}`)}
+      onClick={() => router.push("/demo")}
     >
       {!postPage && (
         <img
