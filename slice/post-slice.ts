@@ -1,15 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 
-const initialState = {};
+const initialState = {
+  modal: false,
+  postId: "",
+};
 
 export const postSlice = createSlice({
   name: "post",
   initialState,
-  reducers: {},
+  reducers: {
+    setModal: (state, action) => {
+      state.modal = action.payload;
+    },
+    setPostId: (state, action) => {
+      state.postId = action.payload;
+    },
+  },
 });
 
-export const {} = postSlice.actions;
+export const { setModal, setPostId } = postSlice.actions;
 
 export const selectPost = (state: RootState) => state.post;
 

@@ -25,11 +25,21 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Moment from "react-moment";
 import firestore from "../firebaseinit";
+import { selectPost, setModal, setPostId } from "../slice/post-slice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 
-interface Props {}
+interface Props {
+  postPage?: boolean;
+  id: string;
+  post: any;
+}
 
-const Post = ({ postPage, post, id }) => {
+const Post = ({ postPage, post, id }: Props) => {
   const { data: session } = useSession();
+
+  const select = useAppSelector(selectPost);
+  const dispatch = useAppDispatch();
+
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState([]);
   const [liked, setLiked] = useState(false);
@@ -139,11 +149,11 @@ const Post = ({ postPage, post, id }) => {
         >
           <div
             className="flex items-center space-x-1 group"
-            // onClick={(e) => {
-            //   e.stopPropagation();
-            //   setPostId(id);
-            //   setIsOpen(true);
-            // }}
+            onClick={(e) => {
+              e.stopPropagation();
+              dispatch(setModal(true));
+              dispatch(setPostId(id));
+            }}
           >
             <div className="icon group-hover:bg-[#1d9bf0] group-hover:bg-opacity-10">
               <ChatIcon className="h-5 group-hover:text-[#1d9bf0]" />

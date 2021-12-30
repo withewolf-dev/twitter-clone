@@ -22,7 +22,8 @@
     "next.config.js",
     "next.config.tjs",
     "pages/api/auth/[...nextauth].js",
-    "components/Login.jsx"
+    "components/Login.jsx",
+    "components/Feed.jsx"
   ],
   "exclude": ["node_modules"]
 }

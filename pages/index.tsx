@@ -7,10 +7,15 @@ import {
 import Head from "next/head";
 import { Feed } from "../components/Feed";
 import Login from "../components/Login";
+import Modal from "../components/Modal";
 import SideBar from "../components/SideBar";
+import { selectPost } from "../slice/post-slice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 export default function Home({ trendingResults, followResults, providers }) {
   const { data: session } = useSession();
+
+  const select = useAppSelector(selectPost);
 
   if (!session) return <Login providers={providers} />;
   return (
@@ -23,6 +28,7 @@ export default function Home({ trendingResults, followResults, providers }) {
       <main className="bg-black min-h-screen flex max-w-[1500px] mx-auto">
         <SideBar />
         <Feed />
+        {select.modal && <Modal />}
       </main>
     </div>
   );
