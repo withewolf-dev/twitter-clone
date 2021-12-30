@@ -24,10 +24,6 @@ export default function Home({ trendingResults, followResults, providers }) {
   if (!session) return <Login providers={providers} />;
   console.log(session.user);
 
-  useEffect(() => {
-    dispatch(setSession(session.user));
-  }, [session]);
-
   return (
     <div>
       <Head>
