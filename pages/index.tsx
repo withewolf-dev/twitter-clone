@@ -22,7 +22,6 @@ export default function Home({ trendingResults, followResults, providers }) {
   const dispatch = useAppDispatch();
 
   if (!session) return <Login providers={providers} />;
-  console.log(session.user);
 
   return (
     <div>

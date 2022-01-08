@@ -10,6 +10,7 @@ import {
   UserIcon,
   DotsCircleHorizontalIcon,
   DotsHorizontalIcon,
+  LogoutIcon,
 } from "@heroicons/react/outline";
 import SideBarLink from "./SideBarLink";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -47,7 +48,7 @@ const SideBar = (props: Props) => {
           <h4 className="font-bold">{session.user.name}</h4>
           <p className="text-[#6e767d]">@{session.user[`tag`]}</p>
         </div>
-        <DotsHorizontalIcon
+        <LogoutIcon
           className="h-5 hidden xl:inline ml-10"
           onClick={(e) => {
             e.preventDefault();
