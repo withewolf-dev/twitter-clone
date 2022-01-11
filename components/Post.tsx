@@ -120,13 +120,7 @@ const Post = ({ postPage, post, id }: Props) => {
         await deleteDoc(doc(firestore, "posts", post?.rtPostId));
 
         await deleteDoc(
-          doc(
-            firestore,
-            "posts",
-            "uVOVse60Too3be2wF8zN",
-            "retweets",
-            post?.rtweeterId
-          )
+          doc(firestore, "posts", post?.id, "retweets", post?.rtweeterId)
         );
       } else {
         await deleteDoc(doc(firestore, "posts", rtId));
